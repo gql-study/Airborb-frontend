@@ -1,16 +1,8 @@
 /* eslint-disable react/require-default-props */
 import styled from 'styled-components';
+import { useState } from 'react';
 import Heart from '../assets/svgIcons/Heart';
 import Star from '../assets/svgIcons/Star';
-
-interface CardProps {
-  desc: string;
-  reviewCount: number;
-  reviewRating: number;
-  price: number;
-  nation: string;
-  thumbnail: string;
-}
 
 const StFlexbox = styled.div`
   display: flex;
@@ -38,17 +30,20 @@ const StImageBox = styled.div<{ url: string }>`
   border-radius: 18px;
 `;
 
-const StLikeButton = styled.button`
+const StLikeButton = styled.button<{ isLiked: boolean }>`
   position: absolute;
   top: 3px;
   right: 3px;
 
   background-color: transparent;
   border: none;
+
+  & > svg {
+    fill: ${(props) => (props.isLiked ? '#FF385C' : 'rgba(0, 0, 0, 0.5)')};
+  }
 `;
 const StStar = styled(Star)`
   display: flex;
-  align-items: center;
 `;
 
 const StInformation = styled(StFlexbox)`
@@ -60,11 +55,13 @@ const StReviewRating = styled.span`
   font-size: 14px;
   font-weight: 300;
 `;
+
 const StReviewCount = styled.span`
   font-size: 14px;
   font-weight: 300;
   color: ${({ theme }) => theme.colors.foggy};
 `;
+
 const StNation = styled.span`
   font-weight: 400;
   font-size: 12px;
@@ -73,6 +70,7 @@ const StNation = styled.span`
     content: ' · ';
   }
 `;
+
 const StCardDesc = styled.p`
   display: -webkit-box;
   font-size: 14px;
@@ -86,6 +84,7 @@ const StCardDesc = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
 const StPrice = styled.p`
   font-size: 14px;
   font-weight: bolder;
@@ -95,21 +94,42 @@ const StPrice = styled.p`
   }
 `;
 
+export interface CardProps {
+  desc: string;
+  reviewCount: number;
+  reviewRating: number;
+  price: number;
+  nation: string;
+  thumbnail: string;
+  isLiked: boolean;
+}
+
 function Card(props: CardProps) {
-  const { desc, reviewCount, reviewRating, price, nation, thumbnail } = props;
+  const {
+    desc,
+    reviewCount,
+    reviewRating,
+    price,
+    nation,
+    thumbnail,
+    isLiked: isDefaultLiked,
+  } = props;
+  const [isLiked, setIsLiked] = useState(isDefaultLiked);
+
+  const handleClickLike = () => {
+    setIsLiked((prevLikeState) => !prevLikeState);
+  };
 
   return (
     <StCard>
       <StImageBox url={thumbnail}>
-        <StLikeButton>
+        <StLikeButton isLiked={isLiked} onClick={handleClickLike}>
           <Heart />
         </StLikeButton>
       </StImageBox>
       <StInformation>
-        <StFlexbox>
-          <span style={{ display: 'flex', alignItems: 'center' }}>
-            <StStar />
-          </span>
+        <StFlexbox style={{ alignItems: 'center' }}>
+          <StStar />
           <StReviewRating>{reviewRating}</StReviewRating>
           <StReviewCount>({reviewCount})</StReviewCount>
           <StNation>{nation}</StNation>

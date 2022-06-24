@@ -8,7 +8,6 @@ function Heart() {
       focusable="false"
       style={{
         display: 'block',
-        fill: 'rgba(0, 0, 0, 0.5)',
         height: '24px',
         width: '24px',
         stroke: 'white',
