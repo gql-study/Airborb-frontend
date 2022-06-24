@@ -1,3 +1,5 @@
+import GallerySlider from '../components/GallerySlider';
+
 export default function Detail() {
-  return <div>detail</div>;
+  return <GallerySlider />;
 }
