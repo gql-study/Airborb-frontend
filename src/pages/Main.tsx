@@ -200,9 +200,11 @@ export default function Main() {
 
   const handleClickButton = () => {
     // api 붙이면서 로직 수정 할 것!
-    // setIsLoading(true);
-    setCardList([...cardList, ...dummyCardInfoList]);
-    setIsLoading(false);
+    setIsLoading(true);
+    setTimeout(() => {
+      setCardList([...cardList, ...dummyCardInfoList]);
+      setIsLoading(false);
+    }, 1000);
   };
 
   const handleRecommendIdx = (index: number) => {
