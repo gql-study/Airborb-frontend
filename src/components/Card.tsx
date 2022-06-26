@@ -124,7 +124,7 @@ function Card(props: CardProps) {
     <StCard>
       <StImageBox url={thumbnail}>
         <StLikeButton isLiked={isLiked} onClick={handleClickLike}>
-          <Heart />
+          <Heart width="24px" height="24px" stroke="white" />
         </StLikeButton>
       </StImageBox>
       <StInformation>

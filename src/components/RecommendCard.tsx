@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Star from '../assets/svgIcons/Star';
-import RecommendHeart from '../assets/svgIcons/RecommendHeart';
+import Heart from '../assets/svgIcons/Heart';
 
 const StWrapper = styled.div`
   width: 320px;
@@ -122,7 +122,7 @@ function RecommendCard(props: RecommendCardProps) {
             <StReviewCount>({reviewCount})</StReviewCount>
           </div>
           <StLikeButton isLiked={isLiked} onClick={handleClickLike}>
-            <RecommendHeart />
+            <Heart height="16px" width="16px" stroke="black" />
           </StLikeButton>
         </StFlexbox>
         <StCardDesc>{desc}</StCardDesc>
